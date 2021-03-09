@@ -113,11 +113,21 @@ objetivos
 1- converter os valores da coluna: df["city-mpg"] = 235/df["city-mpg"]
 2- renomear a coluna: df.rename(columns = {"city-mpg": "city-L/100km"}, inplace = True)
 '''
-
 #converter tipo de dados de uma coluna
 #identificar os tipos de dados
 #print(df['price'])
 #converter -> df['price'] = df['price'].astype(int)
-
-
 print(df.dtypes["price"])
+
+
+#normalizando dados
+#simple feature scaling ->xnew=xold/xmax -> dessa forma os valores variam de 0 a 1
+'''min-max -> xnew = (xold-xmin)/(xmax-xmin) -> dessa forma os valores variam de 0 a 1
+exemplo numa coluna chamada length
+df["length"] = (df["length"]-df["length"].min()) / (df["length"].max() - df["length"].min())
+
+Z-score -> xnew = (xold-mu)/sigma (mu=media do elemento) (sigma=desvio padrão) - tipicamente variam entre -3 a +3, mas pode ser mais alto ou menor
+dessa forma os valores variam de 0 a 1
+exemplo numa coluna chamada length
+df["length"] = (df["length"]-df["length"].mean()) / (df["length"].std())
+'''
