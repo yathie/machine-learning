@@ -12,7 +12,7 @@ df = pd.read_csv(url, header = None) #header = None -> indica que o arquivo não
 
 #df.head(n) mostra as primeiras n linhas do conjunto dados
 #df.tail(n) mostra as ultimas n linhas do conjunto dados
-#print(df.head(5))
+df.head(5)
 
 #atribuindo cabeçalho
 headers = ["symboling", "normalized-losses", "make", "fuel-type", "aspiration", "num-of-doors", "body-style", "drive-wheels", "engine-location", "wheel-base", "length", "width", "height", "curb-weight", "engine-type", "num-of-cylinders", "engine-size", "fuel-system", "bore", "stroke", "compression-ratio", "horsepower", "peak-rpm", "city-mpg", "highway-mpg", "price"]
@@ -25,18 +25,18 @@ df.columns = headers
 #exportar dados para csv
 #automoveis.csv -> nome escolhido para salvar o arquivo
 path = "/home/.../cars.csv"
-df.to_csv(path)
+#df.to_csv(path)
 
 
 
 #metodos basicos do pandas
 
 #checar typos de dados de um conjunto de dados
-print(df.dtypes)
+df.dtypes
 
 #resumo estatístico de cada coluna
 #as métricas estatísticas podem dizer se há problemas matemáticos, como anomalias extremas e grandes desvios
-print(df.describe(include = "all"))
+df.describe(include = "all")
 
 '''
 count - total de linhas por coluna
@@ -56,4 +56,25 @@ freq - número de vezes que o objeto top aparece na coluna
 '''
 
 #.info() -> mostra 30 linhas superiores e inferiores do conjunto de dados. É um sumário conciso da base de dados
-print(df.info())
+df.info()
+
+
+'''
+#acesso a banco de dados com Python
+
+#code using DB-API
+from dbmodule import connect
+
+#create connection object
+connection = connect('databasename', 'username', 'pswd')
+#create a cursor object
+cursor = connection.cursor()
+
+#run queries
+cursor.execute('select * from mytable')
+results = cursor.fetchall()
+
+#free resources
+Cursor.close()
+connection.close()
+'''
