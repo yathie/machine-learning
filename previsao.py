@@ -56,7 +56,7 @@ freq - número de vezes que o objeto top aparece na coluna
 '''
 
 #.info() -> mostra 30 linhas superiores e inferiores do conjunto de dados. É um sumário conciso da base de dados
-df.info()
+#df.info()
 
 
 '''
@@ -107,3 +107,17 @@ objetivos
 1- calcular a media da coluna: mean = df["normalized_losses"].mean()
 2 -  substituir: df["normalized_losses"].replace(np.nan, mean)
 '''
+
+#formatacao de dados
+'''exemplo converter "mpg" para "L/100km" em df
+1- converter os valores da coluna: df["city-mpg"] = 235/df["city-mpg"]
+2- renomear a coluna: df.rename(columns = {"city-mpg": "city-L/100km"}, inplace = True)
+'''
+
+#converter tipo de dados de uma coluna
+#identificar os tipos de dados
+#print(df['price'])
+#converter -> df['price'] = df['price'].astype(int)
+
+
+print(df.dtypes["price"])
