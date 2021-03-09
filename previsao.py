@@ -81,7 +81,7 @@ connection.close()
 
 
 
-
+##
 #técnicas de pré-processamento
 '''
 objetivos
@@ -148,3 +148,30 @@ transformando variáveis categóricas em variaveis quantitativas
 #exemplo de uma coluna 'fuel' com valores 'gas' e 'diesel'
 pd.get_dummies(df['fuel']) -> gera automaticamente uma lista de números, cada um correspondendo a uma categoria especifica de variável
 '''
+
+##
+#Análise de dados exploratórios - básico
+'''objetivos
+- descriptve statistics -> estatistica descritiva descreve aspectos básicos de um conjunto de dados
+-groupBy
+-ANOVA -> análise de variância, metodo estístico no qual a variação em um grupo de observações é dividido em componentes distintos
+- correlation
+-correlation - statistics (Pearson e mapas termicos)
+'''
+
+'''descriptve statistics 
+é importante explorar os dados antes de construir modelos complicados, estatistica descritiva ajuda nisso.
+A análise estatística descritiva descreve elementos básicos de um conjunto, e obtem um breve resumo sobre a amostra e as medidas dos dados
+#metodo1 
+#computa automaticamente estatísticas básicas de todas as variaveis numericas - Os valores de NaN serão excluídos
+df.describe()
+#metodo2
+#resumir variaveis categoricas - elas são variáveis que podem ser divididas em diferentes categorias ou grupos
+#exemplo categoria 'drive-wheels', pode-se contar o total de cada variavel diferente.
+  drive_wheels_counts = df["drive-wheels"].value_counts().to_frame()
+  drive_wheels_counts.rename(columns={'drive-wheels':'values_counts'}, inplace=True)
+'''
+drive_wheels_counts = df["drive-wheels"].value_counts().to_frame()
+#alterando nome da coluna para facilitar a leitura
+drive_wheels_counts.rename(columns={'drive-wheels':'values_counts'}, inplace=True)
+print(drive_wheels_counts)
