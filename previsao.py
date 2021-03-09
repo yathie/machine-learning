@@ -142,3 +142,9 @@ group_names = ["Low", "Medium", "High"]
 #vincular o nome da lista ao compartimento gerado
 df["price-binned"] = pd.cut(df["price"], bins, labels=group_names, include_lowest=True)
 '''
+
+'''Categorical variables
+transformando variáveis categóricas em variaveis quantitativas
+#exemplo de uma coluna 'fuel' com valores 'gas' e 'diesel'
+pd.get_dummies(df['fuel']) -> gera automaticamente uma lista de números, cada um correspondendo a uma categoria especifica de variável
+'''
