@@ -78,3 +78,32 @@ results = cursor.fetchall()
 Cursor.close()
 connection.close()
 '''
+
+
+
+
+#técnicas de pré-processamento
+'''
+objetivos
+-identify and handle missing values
+-data formatting
+-data normalization (centering/scaling)
+-data binning
+-turning categorical values to numeric variables
+'''
+
+#remover ou substituir missing values em Python
+#.dropna() -> permite remover linhas ou colunas com valores ausentes
+#axis=0 remove toda a linha
+#axis=1 remove toda a coluna
+#ex.: df.dropna(subset=["coluna"], axis=0, inplace = True)
+#df.dropna(subset=["coluna"], axis=0) -> não muda oa estrutura de dados
+#inplace = True -> escreve o resultado de volta no conjunto de dados
+#http://pandas.pydara.org/
+
+#substituir
+#df.replace(missing_value, new_value)
+'''exemplo: substituir um valor  NaN na coluna normalized_losses
+1- calcular a media da coluna: mean = df["normalized_losses"].mean()
+2 -  substituir: df["normalized_losses"].replace(np.nan, mean)
+'''
