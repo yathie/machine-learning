@@ -20,4 +20,9 @@ headers = ["symboling", "normalized-losses", "make", "fuel-type", "aspiration", 
 #substituindo o cabeçalho padrão pelo 'headers'
 df.columns = headers
 
-print(df.head(5))
+#print(df.head(5))
+
+#exportar dados para csv
+#automoveis.csv -> nome escolhido para salvar o arquivo
+path = "/home/.../cars.csv"
+df.to_csv(path)
