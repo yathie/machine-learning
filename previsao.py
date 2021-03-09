@@ -131,3 +131,14 @@ dessa forma os valores variam de 0 a 1
 exemplo numa coluna chamada length
 df["length"] = (df["length"]-df["length"].mean()) / (df["length"].std())
 '''
+
+#Compartimentação (binning)
+''' compartimentação é quando agrupamos valores em compratimentos. Por exemplo, colocar 'idade' em grupos de [0 a 5], [6 a 10], [11 a 15],...
+#gerar os 4 compartimentos igualmente espaçados
+import numpy as np
+bins = np.linspace(min(df["price"]), max(df["price"], 4))
+#criar lista para nomear os grupos
+group_names = ["Low", "Medium", "High"]
+#vincular o nome da lista ao compartimento gerado
+df["price-binned"] = pd.cut(df["price"], bins, labels=group_names, include_lowest=True)
+'''
