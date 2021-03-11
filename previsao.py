@@ -192,7 +192,28 @@ print(df_grp)
 df_pivot = df_grp.pivot(index= 'drive-wheels', columns='body-style')
 print(df_pivot)
 #tabela dinamica de grafico de calor
-import matplotlib.pyplot as plt
+'''import matplotlib.pyplot as plt
 plt.pcolor(df_pivot, cmap='RdBu')
 plt.colorbar()
+plt.show()'''
+
+'''correlação
+é uma metrica estatistica para medir que ponto variaveis diferentes sao interdependentes. em outras palavras, quando olhamos para duas variaveis ao longo do tempo, se uma variavel mudar, como isso afeta a mudanca na outra variavel?
+exemplo: cancer de pulmao -> fumantes; chuva -> sombrinha
+eh importante saber que a correlaçao nao implica causalidade. ou seja, pode-se dizer q chuva e sombrinha estao correlacionadas, mas nao ha informacao suficiente para se dizer se a soombringa causou a chuva ou se a chuva causa a sombrinha
+'''
+#positive linear relationship
+#correlacao entre tamanho do motor e preco
+#grafico dispersao com linha de regressao
+'''import matplotlib.pyplot as plt
+import seaborn as sns
+sns.regplot(x="engine-size", y="price", data=df)
+plt.ylim(0,)
+plt.show()'''
+#negative linear relationship
+#correlacao entre highway-mpg e price
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.regplot(x="highway-mpg", y="price", data=df)
+plt.ylim(0,)
 plt.show()
