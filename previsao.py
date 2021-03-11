@@ -212,8 +212,26 @@ plt.ylim(0,)
 plt.show()'''
 #negative linear relationship
 #correlacao entre highway-mpg e price
-import matplotlib.pyplot as plt
+'''import matplotlib.pyplot as plt
 import seaborn as sns
 sns.regplot(x="highway-mpg", y="price", data=df)
 plt.ylim(0,)
-plt.show()
+plt.show()'''
+
+'''pearson correlation
+retorna dois valores: o coeficiente de correlação e o P-value
+coeficiente de correlação:
+-mais proximo de +1: grande correlação positiva
+-mais proximo de -1: grande correlação negativa
+-mais proximo de 0: sem correlação 
+P-value:
+-P-value < 0,001 forte certeza sobre o coeficiente de correlacao
+-P-value < 0,05 moderada certeza sobre o coeficiente de correlacao
+-P-value < 0,1 fraca certeza sobre o coeficiente de correlacao
+-P-value > 0,1 sem certeza sobre o coeficiente de correlacao
+'''
+#exemplo: correlacao entre  'horsepower' e 'price'
+from scipy.stats import stats
+import matplotlib.pyplot as plt
+
+pear_coef, p_value = stats.pearsonr(df['horsepower'], df['price'])
