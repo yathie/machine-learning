@@ -120,6 +120,8 @@ print(df.dtypes["price"])
 #teste claisa df['price'] = df['price'].convert_dtypes() 
 #converter para float
 df.price = pd.to_numeric(df.price, errors="coerce")
+import numpy as np
+df['price'] = df['price'].fillna(0).astype(np.int64)
 print(df.dtypes["price"])
 
 #normalizando dados
@@ -254,22 +256,65 @@ grouped_anova = df_anova.groupby(["make"])
 from scipy.stats import stats
 anova_results_1 = stats.f_oneway(grouped_anova.get_group("honda")["price"], grouped_anova.get_group("subaru")["price"])
 print(anova_results_1)
+#statistic=0.19744030127462606, pvalue=0.6609478240622193
 #os precos entre honda nao sao muito diferentes, porque o f-test é menor do que 1 e p-value é maior do que 0,05.
 #anova entre honda e jaguar
 from scipy.stats import stats
 anova_results_1 = stats.f_oneway(grouped_anova.get_group("honda")["price"], grouped_anova.get_group("jaguar")["price"])
 print(anova_results_1)
+#statistic=400.925870564337, pvalue=1.0586193512077862e-11
+#nesse caso há grande correlacao entre uma variavel categórica e outras variaveis, pois o teste anova apresentou um f-test grande e um p-value pequeno
 
 
 
 
+##
+#Model Development
+'''
+objetivos:
+-regressão linear simples e multipla
+-model Evaluation using visualization
+-regressão polinomial e pipelines
+-R-squared e MSE for In-Sample evaluation
+-previsão e tomada de decisão
+'''
 
-
-
-
-
-
-
+#regressão linear simples e múltipla
+'''regressão linear faz referência a uma variável independente para fazer uma predição.
+regressão linear multipla faz referência a diversas variáveis independentes para fazer uma predição.
+regressão linear simples(RLS) é um método para nos ajudar a entender a relação entre duas variáveis. A variável preditora independente x e a variável dependente y pretendida:
+y=b0+b1.x
+b0: intercept
+b1: slope
+'''
+#ajustando um modelo linear simples em Python
+#importar
+from sklearn.linear_model import LinearRegression
+#criar um objeto de regressao linear usando o contrutor
+lm = LinearRegression()
+#definir a variavel predidora e a variavel pretendida
+X = df[['highway-mpg']]
+Y = df['price']
+#usar o metodo fit para ajustar o modelo e encontrar os parametros b_0 e b_1
+#lm.fit(X, Y)
+#A entrada sao elementos e objetivos
+#fazer a predição com o metodo predict, o resultado é uma matriz
+#Yhat = lm.predict(X)
+#print(Yhat)
+#print("b0 ",lm.intercept_)
+#print("b1 ", lm.coef_)
+'''
+regressao linear multipla (MLR) é usada para uma variável pretendida (y) e duas ou mais variaveis preditoras (x)
+4 variaveis preditoras -> Y = b0 + b1.x1 + b2.x2 + b3.x3 + b4.x4
+b0: intercept
+b1: coeficiente ou parametro de x1...
+'''
+#ajustando um modelo linear multiplo em Python
+Z = df[['horsepower', 'curb-weight', 'engine-size', 'highway-mpg']]
+#treinar o modelo
+lm.fit(Z, Y)
+Yhat = lm.predict(X)
+print(Yhat)
 
 
 
