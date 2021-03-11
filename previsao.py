@@ -231,7 +231,46 @@ P-value:
 -P-value > 0,1 sem certeza sobre o coeficiente de correlacao
 '''
 #exemplo: correlacao entre  'horsepower' e 'price'
-from scipy.stats import stats
+'''from scipy.stats import stats
 import matplotlib.pyplot as plt
 
-pear_coef, p_value = stats.pearsonr(df['horsepower'], df['price'])
+pear_coef, p_value = stats.pearsonr(df['horsepower'], df['price'])'''
+
+'''anova - analise de variancia
+analisar variaveis categoricas
+ANalysis Of VAriace(anova) - pode ser usada para encontrar a correlacao entre diferentes grupos de uma variavel categorica.
+ex.:podemos usar anova para ver se há alguma diferença de preco medio para diferentes marcas de carro.
+o teste anova apresenta dois valores:
+-F-test score: variacao entre medias de amostras do grupo dividido pela variacao dentro de cada amostra do grupo.
+-p-value: grau de confiança.
+o f-test calcula a relacao de variação entre as medias de grupos sobre a variação dentro de cada umas das medias de grupos de amostra
+'''
+#anova entre honda e subaru
+#pegar os dados de 'make' e 'price'
+df_anova = df[["make","price"]]
+#agrupar os dados por diferentes marcas
+grouped_anova = df_anova.groupby(["make"])
+#teste anova
+from scipy.stats import stats
+anova_results_1 = stats.f_oneway(grouped_anova.get_group("honda")["price"], grouped_anova.get_group("subaru")["price"])
+print(anova_results_1)
+#os precos entre honda nao sao muito diferentes, porque o f-test é menor do que 1 e p-value é maior do que 0,05.
+#anova entre honda e jaguar
+from scipy.stats import stats
+anova_results_1 = stats.f_oneway(grouped_anova.get_group("honda")["price"], grouped_anova.get_group("jaguar")["price"])
+print(anova_results_1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
