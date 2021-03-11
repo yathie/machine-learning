@@ -115,10 +115,12 @@ objetivos
 '''
 #converter tipo de dados de uma coluna
 #identificar os tipos de dados
-#print(df['price'])
-#converter -> df['price'] = df['price'].astype(int)
 print(df.dtypes["price"])
-
+#converter -> df['price'] = df['price'].astype(int)
+#teste claisa df['price'] = df['price'].convert_dtypes() 
+#converter para float
+df.price = pd.to_numeric(df.price, errors="coerce")
+print(df.dtypes["price"])
 
 #normalizando dados
 #simple feature scaling ->xnew=xold/xmax -> dessa forma os valores variam de 0 a 1
@@ -175,3 +177,22 @@ drive_wheels_counts = df["drive-wheels"].value_counts().to_frame()
 #alterando nome da coluna para facilitar a leitura
 drive_wheels_counts.rename(columns={'drive-wheels':'values_counts'}, inplace=True)
 print(drive_wheels_counts)
+
+'''GroupBy
+o método .Groupby() agrupa os dados em subconjuntos segundo diferentes categorias dessa variável.
+Ex. queremos encontrar o preço médio dos veículos , mas eles diferem entre tipos de tração e estilo de carroceria:
+'''
+#1- pegamos as colunas de interesse
+df_test = df[['drive-wheels', 'body-style', 'price']]
+#2 - agrupamos dados reduzidos de tração e carroceria
+#estamos interessados em saber como o preço medio varia, pegamos a média de cada grupo e anexamos esse pedaço ao fim da linha. Os dados estão agrupados em subcategorias, e somente o preço médio de cada subcategoria é mostrado
+df_grp = df_test.groupby(['drive-wheels', 'body-style'], as_index=False).mean()
+print(df_grp)
+#tabela dinamica com body-style na coluna e drive-wheels na linha
+df_pivot = df_grp.pivot(index= 'drive-wheels', columns='body-style')
+print(df_pivot)
+#tabela dinamica de grafico de calor
+import matplotlib.pyplot as plt
+plt.pcolor(df_pivot, cmap='RdBu')
+plt.colorbar()
+plt.show()
